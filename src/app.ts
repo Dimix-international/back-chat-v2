@@ -17,6 +17,10 @@ const io = new Server(httpServer, {
 });
 let users: UTUsers = {}
 
+app.get('/', (req, res) => {
+    res.send('Hello it is WS server'); //создали endpoint
+})
+
 io.on("connection", (socket) => {
     //'all-users'
     socket.on('disconnect', () => {
@@ -47,6 +51,8 @@ io.on("connection", (socket) => {
 
         io.to(socketId).emit(ACTIONS_CHAT.USER_TYPING_MESSAGE, data)
     })
+
+    console.log(' a user connected')
 });
 
 const PORT = process.env.PORT || 7000;
